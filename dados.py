@@ -74,13 +74,17 @@ print("----------------------------------------")
 j = 1
 cp = 0
 st = 0
+kp = 0
+kp1 = []
 p = [ 1, 3, 6, 10, 15, 21, 25, 27, 27, 25, 21, 15, 10, 6, 3, 1 ]
 for i in range(3, 19) :
     cp += p[i-3]
-    print("{:<15}{:<15}{:<15}".format(i, p[i-3], sums[i]))
+    kp = round(100*(p[i-3])/216,2)
+    kp1.append(kp)
+    print("{:<15}{:<15}{:<15}".format(i, p[i-3], kp))
     st += sums[i]
 print("----------------------------------------")
-print("{:<15}{:<15}{:<15}".format("Soma", cp, st))
+print("{:<15}{:<15}{:<15}".format("Soma", cp, 100))
 print("\n\n")
 
 print("=== PORCENTAGEM DAS SOMAS ===\n")
@@ -91,15 +95,15 @@ for i in range(3, 19) :
     p = (100 * sums[i]) / st
     d = 0
 
-    if p < 5.56 :
-        d = round(5.56 - p, 2)
+    if p < kp1[i-3] :
+        d = round(kp1[i-3] - p, 2)
     else :
-        d = round(p - 5.56, 2)
+        d = round(p - kp1[i-3], 2)
     dt += d
 
-    print("{:<15}{:<15}{:<15}{:<15}{:<15}".format(i, sums[i], p, 5.56, d))
+    print("{:<15}{:<15}{:<15}{:<15}{:<15}".format(i, sums[i], p, kp1[i-3], d))
 print("---------------------------------------------------------------------")
-print("{:<15}{:<15}{:<15}{:<15}{:<15}".format("Soma", st, 100, 100, dt))
+print("{:<15}{:<15}{:<15}{:<15}{:<15}".format("Soma", st, 100, 100, round(dt,2)))
 print("\n\n")
 
 print("=== OCORRÊNCIAS DAS SOMAS X SOMAS ===\n")
